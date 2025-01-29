@@ -23,9 +23,7 @@ public static class DependecyInjection
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseMySql(
-                connectionString,
-                ServerVersion.AutoDetect(connectionString));
+            options.UseNpgsql(connectionString);
         });
     }
 }

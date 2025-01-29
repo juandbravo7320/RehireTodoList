@@ -8,9 +8,10 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
 {
     public void Configure(EntityTypeBuilder<Role> builder)
     {
+        builder.ToTable(nameof(Role));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
-        builder.Property(x => x.Name).IsRequired().HasMaxLength(150);
+        builder.Property(x => x.Name).IsRequired().HasMaxLength(300);
         
         builder.HasData(
             new Role(

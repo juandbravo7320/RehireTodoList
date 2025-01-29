@@ -1,6 +1,8 @@
+using ToDoList.Domain.Abstractions;
+
 namespace ToDoList.Domain.Users;
 
-public sealed class RolePermission 
+public sealed class RolePermission : Auditable
 {
     public Guid RoleId { get; }
     public Role Role { get; }

@@ -9,6 +9,10 @@ public sealed class Role : Entity
     
     public ICollection<RolePermission> RolePermissions { get; }
     
+    public Role(Guid id) : base(id)
+    {
+    }
+    
     public Role(
         Guid id,
         string name,

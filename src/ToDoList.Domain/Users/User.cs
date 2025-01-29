@@ -12,6 +12,10 @@ public sealed class User : Entity
     
     public ICollection<UserPermission> UserPermissions { get; }
     
+    public User(Guid id) : base(id)
+    {
+    }
+    
     public User(
         Guid id,
         string firstName,

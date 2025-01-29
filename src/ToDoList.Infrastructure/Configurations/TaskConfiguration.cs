@@ -8,6 +8,7 @@ public class TaskConfiguration : IEntityTypeConfiguration<Task>
 {
     public void Configure(EntityTypeBuilder<Task> builder)
     {
+        builder.ToTable(nameof(Task));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Description).IsRequired().HasMaxLength(500);
         builder.Property(x => x.Status).IsRequired().HasConversion<int>();

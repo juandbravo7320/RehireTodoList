@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Domain.Abstractions;
 using ToDoList.Domain.Users;
+using Task = ToDoList.Domain.Tasks.Task;
 
 namespace ToDoList.Infrastructure;
 

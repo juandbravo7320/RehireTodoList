@@ -1,7 +1,7 @@
 ﻿services:
   todolist.api:
     image: ${DOCKER_REGISTRY-}todolist.api
-    container_name: todolist.api
+    container_name: ToDoList.Api
     build:
       context: .
       dockerfile: src/ToDoList.Api/Dockerfile
@@ -9,14 +9,13 @@
       - todolist.db
     
   todolist.db:
-    image: mysql:latest
-    container_name: todolist.db
+    image: postgres:latest
+    container_name: ToDoList.Database
     environment:
-        MYSQL_ROOT_PASSWORD: admin
-        MYSQL_DATABASE: todolist
-        MYSQL_USER: admin
-        MYSQL_PASSWORD: admin
-    ports:
-      - "3306:3306"
+      - POSTGRES_DB=todolist
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - ./.containers/database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
