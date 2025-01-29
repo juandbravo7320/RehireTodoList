@@ -1,0 +1,22 @@
+﻿services:
+  todolist.api:
+    image: ${DOCKER_REGISTRY-}todolist.api
+    container_name: todolist.api
+    build:
+      context: .
+      dockerfile: src/ToDoList.Api/Dockerfile
+    depends_on:
+      - todolist.db
+    
+  todolist.db:
+    image: mysql:latest
+    container_name: todolist.db
+    environment:
+        MYSQL_ROOT_PASSWORD: admin
+        MYSQL_DATABASE: todolist
+        MYSQL_USER: admin
+        MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql

@@ -4,8 +4,10 @@ namespace ToDoList.Domain.Users;
 
 public sealed class Role : Entity
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public string Name { get; private set; }
+    public string Description { get; private set; }
+    
+    public ICollection<RolePermission> RolePermissions { get; }
     
     public Role(
         Guid id,

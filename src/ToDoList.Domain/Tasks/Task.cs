@@ -1,4 +1,5 @@
 using ToDoList.Domain.Abstractions;
+using ToDoList.Domain.Users;
 
 namespace ToDoList.Domain.Tasks;
 
@@ -7,6 +8,7 @@ public class Task : Entity
     public string Description { get; set; }
     public TaskStatus Status { get; set; }
     public Guid OwnerId { get; private set; }
+    public User Owner { get; }
 
     public Task(
         Guid id,

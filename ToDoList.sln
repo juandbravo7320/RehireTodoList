@@ -8,7 +8,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Application", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Infrastructure", "src\ToDoList.Infrastructure\ToDoList.Infrastructure.csproj", "{7FFECC77-3786-4CDC-AB2B-02207D15F37D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Api", "src\ToDoList.Api\ToDoList.Api.csproj", "{485A5857-CCAC-4EBA-A4A4-611C3D55AA6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Api", "src\ToDoList.Api\ToDoList.Api.csproj", "{F1797E61-54EA-4C3D-A14E-F7E610A5F2F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2774AA85-86A6-47F8-B26E-A0A1352A805B}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,7 +24,7 @@ Global
 		{38A32D45-A3C8-4CE6-8EE3-4B28C2AC0416} = {39C74A9E-E80D-4C9B-9E09-52BDCE469C41}
 		{6CDEEEF5-9FC6-4364-9770-45A973092F2E} = {39C74A9E-E80D-4C9B-9E09-52BDCE469C41}
 		{7FFECC77-3786-4CDC-AB2B-02207D15F37D} = {39C74A9E-E80D-4C9B-9E09-52BDCE469C41}
-		{485A5857-CCAC-4EBA-A4A4-611C3D55AA6E} = {39C74A9E-E80D-4C9B-9E09-52BDCE469C41}
+		{F1797E61-54EA-4C3D-A14E-F7E610A5F2F3} = {39C74A9E-E80D-4C9B-9E09-52BDCE469C41}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{38A32D45-A3C8-4CE6-8EE3-4B28C2AC0416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -34,9 +39,9 @@ Global
 		{7FFECC77-3786-4CDC-AB2B-02207D15F37D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FFECC77-3786-4CDC-AB2B-02207D15F37D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FFECC77-3786-4CDC-AB2B-02207D15F37D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{485A5857-CCAC-4EBA-A4A4-611C3D55AA6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{485A5857-CCAC-4EBA-A4A4-611C3D55AA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{485A5857-CCAC-4EBA-A4A4-611C3D55AA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{485A5857-CCAC-4EBA-A4A4-611C3D55AA6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1797E61-54EA-4C3D-A14E-F7E610A5F2F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1797E61-54EA-4C3D-A14E-F7E610A5F2F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1797E61-54EA-4C3D-A14E-F7E610A5F2F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1797E61-54EA-4C3D-A14E-F7E610A5F2F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

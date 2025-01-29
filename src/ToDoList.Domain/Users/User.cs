@@ -10,6 +10,8 @@ public sealed class User : Entity
     public string PasswordHash { get; set; }
     public string Username { get; set; }
     
+    public ICollection<UserPermission> UserPermissions { get; }
+    
     public User(
         Guid id,
         string firstName,

@@ -6,4 +6,12 @@ public sealed class RolePermission
     public Role Role { get; }
     public Guid PermissionId { get; }
     public Permission Permission { get; }
+    
+    public RolePermission(
+        Guid roleId,
+        Guid permissionId)
+    {
+        RoleId = roleId;
+        PermissionId = permissionId;
+    }
 }
