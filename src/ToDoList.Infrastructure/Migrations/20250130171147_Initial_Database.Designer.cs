@@ -12,7 +12,7 @@ using ToDoList.Infrastructure;
 namespace ToDoList.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250129213550_Initial_Database")]
+    [Migration("20250130171147_Initial_Database")]
     partial class Initial_Database
     {
         /// <inheritdoc />
@@ -99,7 +99,7 @@ namespace ToDoList.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("ebd92069-30cd-4d60-8ac2-9fa5fd384ed5"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 7, DateTimeKind.Utc).AddTicks(7560),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 635, DateTimeKind.Utc).AddTicks(3480),
                             CreatedBy = "System",
                             Description = "Allows the user to manage other users within the application. This includes creating new user accounts, updating user information, assigning or modifying roles and permissions, deactivating or deleting accounts, and overseeing user activity as needed. This permission is typically reserved for administrators or higher-level users.",
                             Name = "Manage Users"
@@ -107,7 +107,7 @@ namespace ToDoList.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 7, DateTimeKind.Utc).AddTicks(7560),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 635, DateTimeKind.Utc).AddTicks(3480),
                             CreatedBy = "System",
                             Description = "Allows the user to add new tasks to the list, assigning a description, and any other relevant details.",
                             Name = "Create Task"
@@ -115,7 +115,7 @@ namespace ToDoList.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("2ee1b98c-3aac-4eba-aaa6-210c6a4133a3"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 7, DateTimeKind.Utc).AddTicks(7560),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 635, DateTimeKind.Utc).AddTicks(3480),
                             CreatedBy = "System",
                             Description = "Allows the user to view existing tasks, including their properties, and additional details.",
                             Name = "Read Task"
@@ -123,7 +123,7 @@ namespace ToDoList.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("c0161d02-d8df-491b-b8c0-78eafaaf3b1c"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 7, DateTimeKind.Utc).AddTicks(7560),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 635, DateTimeKind.Utc).AddTicks(3490),
                             CreatedBy = "System",
                             Description = "Allows the user to modify existing tasks, including changing the description, status or any other task attributes",
                             Name = "Update Task"
@@ -131,7 +131,7 @@ namespace ToDoList.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("61c1c4e4-468f-4825-8097-4e0611304c85"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 7, DateTimeKind.Utc).AddTicks(7560),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 635, DateTimeKind.Utc).AddTicks(3490),
                             CreatedBy = "System",
                             Description = "Allows the user to remove tasks from the list, either deleting a single task or multiple selected tasks.",
                             Name = "Delete Task"
@@ -174,7 +174,7 @@ namespace ToDoList.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 7, DateTimeKind.Utc).AddTicks(8280),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 519, DateTimeKind.Utc).AddTicks(4710),
                             CreatedBy = "System",
                             Description = "Has full access to the application, including managing users, assigning roles, and performing all task-related actions (create, read, update, and delete). Admins can also configure system settings and oversee overall application functionality.",
                             Name = "Admin"
@@ -182,7 +182,7 @@ namespace ToDoList.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("f55cbc28-01c4-427d-9a40-ed271472da7d"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 7, DateTimeKind.Utc).AddTicks(8280),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 519, DateTimeKind.Utc).AddTicks(4920),
                             CreatedBy = "System",
                             Description = "Has advanced permissions, allowing them to create, read, update, and delete tasks. However, they do not have administrative privileges such as user management or system settings modification.",
                             Name = "Level 2"
@@ -190,7 +190,7 @@ namespace ToDoList.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("cce065f9-acb8-429d-8deb-3e75f7b1e2a0"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 7, DateTimeKind.Utc).AddTicks(8280),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 519, DateTimeKind.Utc).AddTicks(4920),
                             CreatedBy = "System",
                             Description = "Has basic permissions, typically limited to creating and reading their own tasks. Level 1 users do not have the ability to update or delete tasks, nor can they manage other users or system settings.",
                             Name = "Level 1"
@@ -229,77 +229,77 @@ namespace ToDoList.Infrastructure.Migrations
                         {
                             RoleId = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
                             PermissionId = new Guid("ebd92069-30cd-4d60-8ac2-9fa5fd384ed5"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8330),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
                             PermissionId = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8330),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
                             PermissionId = new Guid("2ee1b98c-3aac-4eba-aaa6-210c6a4133a3"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8330),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
                             PermissionId = new Guid("c0161d02-d8df-491b-b8c0-78eafaaf3b1c"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8330),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
                             PermissionId = new Guid("61c1c4e4-468f-4825-8097-4e0611304c85"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8330),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("f55cbc28-01c4-427d-9a40-ed271472da7d"),
                             PermissionId = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8330),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("f55cbc28-01c4-427d-9a40-ed271472da7d"),
                             PermissionId = new Guid("2ee1b98c-3aac-4eba-aaa6-210c6a4133a3"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8340),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("f55cbc28-01c4-427d-9a40-ed271472da7d"),
                             PermissionId = new Guid("c0161d02-d8df-491b-b8c0-78eafaaf3b1c"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8340),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("f55cbc28-01c4-427d-9a40-ed271472da7d"),
                             PermissionId = new Guid("61c1c4e4-468f-4825-8097-4e0611304c85"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8340),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("cce065f9-acb8-429d-8deb-3e75f7b1e2a0"),
                             PermissionId = new Guid("d2b3fb32-95c1-4703-aec2-c98a36762138"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8340),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5300),
                             CreatedBy = "System"
                         },
                         new
                         {
                             RoleId = new Guid("cce065f9-acb8-429d-8deb-3e75f7b1e2a0"),
                             PermissionId = new Guid("2ee1b98c-3aac-4eba-aaa6-210c6a4133a3"),
-                            CreatedAtUtc = new DateTime(2025, 1, 29, 21, 35, 50, 8, DateTimeKind.Utc).AddTicks(8340),
+                            CreatedAtUtc = new DateTime(2025, 1, 30, 17, 11, 47, 636, DateTimeKind.Utc).AddTicks(5310),
                             CreatedBy = "System"
                         });
                 });
@@ -336,6 +336,9 @@ namespace ToDoList.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("UpdatedAtUtc")
                         .HasColumnType("timestamp with time zone");
 
@@ -348,6 +351,8 @@ namespace ToDoList.Infrastructure.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("User", (string)null);
                 });
@@ -406,6 +411,17 @@ namespace ToDoList.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Permission");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("ToDoList.Domain.Users.User", b =>
+                {
+                    b.HasOne("ToDoList.Domain.Users.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
 
                     b.Navigation("Role");
                 });

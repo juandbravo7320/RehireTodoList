@@ -17,7 +17,14 @@ public class RegisterUserCommandHandler(
         
         if (existUser) return Result.Failure<Guid>(UserErrors.EmailAlreadyExist);
         
-        var user = User.Create(request.FirstName, request.Lastname, request.Email, request.Password, request.Username);
+        var user = User.Create(
+            request.FirstName,
+            request.Lastname, 
+            request.Email,
+            request.Password,
+            request.Username,
+            Role.Level2.Id);
+        
         var passwordHash = passwordHasher.HashPassword(user, request.Password);
         user.PasswordHash = passwordHash;
 

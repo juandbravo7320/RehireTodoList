@@ -9,7 +9,10 @@ public sealed class User : Entity
     public string Email { get; set; }
     public string PasswordHash { get; set; }
     public string Username { get; set; }
-    
+
+    public Guid RoleId { get; set; }
+    public Role Role { get; }
+
     public ICollection<UserPermission> UserPermissions { get; }
     
     public User(Guid id) : base(id)
@@ -22,13 +25,15 @@ public sealed class User : Entity
         string lastName,
         string email,
         string password,
-        string username) : base(id)
+        string username,
+        Guid roleId) : base(id)
     {
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         PasswordHash = password;
         Username = username;
+        RoleId = roleId;
     }
 
     public static User Create(
@@ -36,7 +41,8 @@ public sealed class User : Entity
         string lastName,
         string email,
         string password,
-        string username)
+        string username,
+        Guid roleId)
     {
         return new User(
             Guid.NewGuid(),
@@ -44,6 +50,7 @@ public sealed class User : Entity
             lastName,
             email,
             password,
-            username);
+            username,
+            roleId);
     }
 }
