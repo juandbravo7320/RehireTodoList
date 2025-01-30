@@ -31,7 +31,7 @@ public sealed class User : Entity
         Username = username;
     }
 
-    public User Create(
+    public static User Create(
         string firstName,
         string lastName,
         string email,
