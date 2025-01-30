@@ -31,4 +31,18 @@ public class Task : Entity
             TaskStatus.Open,
             ownerId);
     }
+    
+    public void Update(
+        string description,
+        TaskStatus status)
+    {
+        if (description == Description && 
+            status == Status)
+        {
+            return;
+        }
+        
+        Description = description;
+        Status = status;
+    }
 }

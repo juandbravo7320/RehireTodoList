@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.Tasks.Commands.CreateTask;
+using ToDoList.Application.Tasks.Commands.UpdateTask;
 
 namespace ToDoList.Api.Controllers;
 
@@ -14,5 +15,13 @@ public class TaskController(ISender sender) : ControllerBase
         var result = await sender.Send(request);
         if (result.IsFailure) return BadRequest(result.Error);
         return Ok(result.Value);
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> CreateTask([FromBody] UpdateTaskCommand request)
+    {
+        var result = await sender.Send(request);
+        if (result.IsFailure) return BadRequest(result.Error);
+        return Ok();
     }
 }
