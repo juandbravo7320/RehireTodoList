@@ -5,10 +5,14 @@ namespace ToDoList.Domain.Users;
 public static class UserErrors
 {
     public static Error NotFound = new(
-        "User.Found",
+        "User.NotFound",
         "The user with the specified identifier was not found");
     
     public static Error EmailAlreadyExist = new(
         "User.EmailAlreadyExist",
         "The email address is already in use");
+    
+    public static Error RoleNotFound = new(
+        "User.Role.NotFound",
+        "The role with the specified identifier was not found");
 }

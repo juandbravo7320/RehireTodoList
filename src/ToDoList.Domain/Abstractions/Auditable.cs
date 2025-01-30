@@ -2,8 +2,8 @@ namespace ToDoList.Domain.Abstractions;
 
 public abstract class Auditable
 {
-    public DateTime CreatedAtUtc { get; init; } = DateTime.UtcNow;
-    public string CreatedBy { get; init; } = "System";
-    public DateTime? UpdatedAtUtc { get; init; }
-    public string? UpdatedBy { get; init; }
+    public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
+    public string CreatedBy { get; set; } = "System";
+    public DateTime? UpdatedAtUtc { get; set; }
+    public string? UpdatedBy { get; set; }
 }

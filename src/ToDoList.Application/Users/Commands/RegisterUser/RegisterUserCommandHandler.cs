@@ -6,7 +6,7 @@ using ToDoList.Domain.Users;
 
 namespace ToDoList.Application.Users.Commands.RegisterUser;
 
-public class RegisterUserCommandHandler(
+public sealed class RegisterUserCommandHandler(
     IUnitOfWork unitOfWork,
     IUserRepository userRepository,
     IPasswordHasher<User> passwordHasher) : ICommandHandler<RegisterUserCommand, Guid>

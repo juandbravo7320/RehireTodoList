@@ -4,11 +4,11 @@ namespace ToDoList.Domain.Users;
 
 public sealed class User : Entity
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
+    public string FirstName { get; private set; }
+    public string LastName { get; private set; }
+    public string Email { get; private set; }
     public string PasswordHash { get; set; }
-    public string Username { get; set; }
+    public string Username { get; private set; }
 
     public Guid RoleId { get; set; }
     public Role Role { get; }
@@ -52,5 +52,22 @@ public sealed class User : Entity
             password,
             username,
             roleId);
+    }
+
+    public void Update(
+        string firstName,
+        string lastname,
+        string username,
+        Guid roleId)
+    {
+        if (FirstName == firstName && 
+            LastName == lastname && 
+            Username == username &&
+            RoleId == roleId) return;
+        
+        FirstName = firstName;
+        LastName = lastname;
+        Username = username;
+        RoleId = roleId;
     }
 }

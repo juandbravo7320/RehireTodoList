@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.Users.Commands.RegisterUser;
+using ToDoList.Application.Users.Commands.UpdateUser;
 
 namespace ToDoList.Api.Controllers;
 
@@ -18,5 +19,14 @@ public class UserController(ISender sender) : ControllerBase
         var result = await sender.Send(request);
         if (result.IsFailure) return BadRequest(result.Error);
         return Ok(result.Value);
+    }
+    
+    [HttpPut]
+    [AllowAnonymous]
+    public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand request)
+    {
+        var result = await sender.Send(request);
+        if (result.IsFailure) return BadRequest(result.Error);
+        return Ok();
     }
 }
