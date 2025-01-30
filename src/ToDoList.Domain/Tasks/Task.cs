@@ -21,7 +21,7 @@ public class Task : Entity
         OwnerId = ownerId;
     }
     
-    public Task Create(
+    public static Task Create(
         string description,
         Guid ownerId)
     {
