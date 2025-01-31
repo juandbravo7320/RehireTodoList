@@ -10,4 +10,9 @@ public class UserRepository(ApplicationDbContext dbContext) : GenericRepository<
     {
         return await _dbSet.AnyAsync(u => u.Email == email);
     }
+    
+    public async Task<User?> FindByEmailAsync(string email)
+    {
+        return await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+    }
 }
