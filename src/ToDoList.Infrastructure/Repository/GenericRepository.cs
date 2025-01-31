@@ -18,6 +18,11 @@ public abstract class GenericRepository<T, TId>(ApplicationDbContext dbContext) 
         await _dbSet.AddAsync(entity);
     }
     
+    public void Delete(T entity)
+    {
+        _dbSet.Remove(entity);
+    }
+    
     public void DeleteRange(IEnumerable<T> entities)
     {
         _dbSet.RemoveRange(entities);

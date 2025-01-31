@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.Tasks.Commands.CreateTask;
+using ToDoList.Application.Tasks.Commands.DeleteTask;
 using ToDoList.Application.Tasks.Commands.UpdateTask;
 using ToDoList.Application.Tasks.Queries.ListTasks;
 using ToDoList.Domain.Abstractions;
@@ -49,5 +50,15 @@ public class TaskController(ISender sender) : ControllerBase
         if (result.IsFailure && result.Error == UserErrors.Unauthorized) return Forbid();
         if (result.IsFailure) return BadRequest(result.Error);
         return Ok(result.Value);
+    }
+    
+    [HttpDelete]
+    public async Task<IActionResult> DeleteTask([FromQuery] Guid id)
+    {
+        var request = new DeleteTaskCommand(id);
+        var result = await sender.Send(request);
+        if (result.IsFailure && result.Error == UserErrors.Unauthorized) return Forbid();
+        if (result.IsFailure) return BadRequest(result.Error);
+        return Ok();
     }
 }
