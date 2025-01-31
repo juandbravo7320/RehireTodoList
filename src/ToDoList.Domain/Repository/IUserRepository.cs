@@ -8,4 +8,6 @@ public interface IUserRepository : IGenericRepository<User, Guid>
     Task<bool> ExistWithSameEmailAsync(string email);
     
     Task<User?> FindByEmailAsync(string email);
+    
+    Task<List<UserPermission>> GetPermissionsByUserIdAsync(Guid userId);
 }

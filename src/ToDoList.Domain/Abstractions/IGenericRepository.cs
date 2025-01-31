@@ -5,6 +5,8 @@ public interface IGenericRepository<T, TId> where T : Entity
     Task<T?> FindByIdAsync(TId id);
     
     Task AddAsync(T entity);
+    
+    void DeleteRange(IEnumerable<T> entities);
 
     IQueryable<T> Queryable();
 }

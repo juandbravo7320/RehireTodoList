@@ -57,17 +57,14 @@ public sealed class User : Entity
     public void Update(
         string firstName,
         string lastname,
-        string username,
-        Guid roleId)
+        string username)
     {
         if (FirstName == firstName && 
             LastName == lastname && 
-            Username == username &&
-            RoleId == roleId) return;
+            Username == username) return;
         
         FirstName = firstName;
         LastName = lastname;
         Username = username;
-        RoleId = roleId;
     }
 }

@@ -7,4 +7,4 @@ public record UpdateUserCommand(
     string FirstName,
     string LastName,
     string Username,
-    Guid RoleId) : ICommand;
+    List<Guid> Permissions) : ICommand;

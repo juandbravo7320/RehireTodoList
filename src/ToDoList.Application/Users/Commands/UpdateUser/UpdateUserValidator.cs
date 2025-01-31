@@ -21,7 +21,7 @@ public class UpdateUserValidator : AbstractValidator<UpdateUserCommand>
             .NotEmpty()
             .MaximumLength(50);
 
-        RuleFor(x => x.RoleId)
+        RuleFor(x => x.Permissions)
             .NotEmpty();
     }
 }

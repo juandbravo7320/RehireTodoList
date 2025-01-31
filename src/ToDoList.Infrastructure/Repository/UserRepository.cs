@@ -15,4 +15,13 @@ public class UserRepository(ApplicationDbContext dbContext) : GenericRepository<
     {
         return await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
     }
+
+    public async Task<List<UserPermission>> GetPermissionsByUserIdAsync(Guid userId)
+    {
+        return await _dbSet.Where(x => x.Id == userId)
+            .AsSplitQuery()
+            .Include(x => x.UserPermissions)
+            .SelectMany(x => x.UserPermissions)
+            .ToListAsync();
+    }
 }

@@ -6,4 +6,5 @@ public interface IUserPermissionRepository
 {
     Task AddAsync(UserPermission userPermission);
     Task AddRangeAsync(IEnumerable<UserPermission> userPermissions);
+    void RemoveRange(IEnumerable<UserPermission> userPermissions);
 }

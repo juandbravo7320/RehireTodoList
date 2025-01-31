@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ToDoList.Application.Abstractions.Messaging;
 using ToDoList.Domain.Abstractions;
 using ToDoList.Domain.Repository;
@@ -8,7 +9,8 @@ namespace ToDoList.Application.Users.Commands.UpdateUser;
 public sealed class UpdateUserCommandHandler(
     IUnitOfWork unitOfWork,
     IUserRepository userRepository,
-    IRoleRepository roleRepository) : ICommandHandler<UpdateUserCommand>
+    IPermissionRepository permissionRepository,
+    IUserPermissionRepository userPermissionRepository) : ICommandHandler<UpdateUserCommand>
 {
     public async Task<Result> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
@@ -16,14 +18,46 @@ public sealed class UpdateUserCommandHandler(
         
         if (user is null) return Result.Failure(UserErrors.NotFound);
         
-        var role = await roleRepository.FindByIdAsync(request.RoleId);
+        var permissionsResult = await ValidatePermissions(request.Permissions);
         
-        if (role is null) return Result.Failure(UserErrors.RoleNotFound);
+        if (permissionsResult.IsFailure) return permissionsResult;
 
-        user.Update(request.FirstName, request.LastName, request.Username, request.RoleId);
+        user.Update(request.FirstName, request.LastName, request.Username);
 
+        await UpdatePermissions(request, user);
+        
         await unitOfWork.SaveChangesAsync(cancellationToken);
         
         return Result.Success();
+    }
+
+    private async Task<Result> ValidatePermissions(List<Guid> permissionIds)
+    {
+        var permissions = await permissionRepository.Queryable()
+            .Where(x => permissionIds.Contains(x.Id))
+            .ToListAsync();
+        
+        var notFoundPermissions = permissionIds.Except(permissions.Select(x => x.Id)).ToList();
+        
+        return notFoundPermissions.Count != 0 
+            ? Result.Failure(UserErrors.NotFoundPermissions(notFoundPermissions)) 
+            : Result.Success();
+    }
+    
+    private async Task UpdatePermissions(UpdateUserCommand request, User user)
+    {
+        var userPermissions = await userRepository.GetPermissionsByUserIdAsync(user.Id);
+        
+        var currentPermissionIds = userPermissions.Select(p => p.PermissionId);
+        var newPermissionIds = request.Permissions;
+
+        var permissionsToAdd = newPermissionIds.Except(currentPermissionIds)
+            .Select(permissionId => UserPermission.Create(user.Id, permissionId));
+
+        var permissionsToRemove = userPermissions
+            .Where(p => !newPermissionIds.Contains(p.PermissionId));
+
+        userPermissionRepository.RemoveRange(permissionsToRemove);
+        await userPermissionRepository.AddRangeAsync(permissionsToAdd);
     }
 }

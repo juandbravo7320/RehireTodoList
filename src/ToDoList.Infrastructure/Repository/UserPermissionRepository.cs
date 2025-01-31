@@ -17,4 +17,9 @@ public class UserPermissionRepository(ApplicationDbContext dbContext) : IUserPer
     {
         await _dbSet.AddRangeAsync(userPermissions);
     }
+
+    public void RemoveRange(IEnumerable<UserPermission> userPermissions)
+    {
+        _dbSet.RemoveRange(userPermissions);
+    }
 }

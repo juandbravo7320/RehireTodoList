@@ -19,4 +19,8 @@ public static class UserErrors
     public static Error RoleNotFound = new(
         "User.Role.NotFound",
         "The role with the specified identifier was not found");
+    
+    public static Error NotFoundPermissions(List<Guid> permissionIds) => new(
+        "User.Permission.NotFound",
+        $"The permissions with the identifiers ({string.Join(", ", permissionIds)}) were not found");
 }
