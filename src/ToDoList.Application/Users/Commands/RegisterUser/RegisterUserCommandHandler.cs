@@ -9,7 +9,9 @@ namespace ToDoList.Application.Users.Commands.RegisterUser;
 public sealed class RegisterUserCommandHandler(
     IUnitOfWork unitOfWork,
     IUserRepository userRepository,
-    IPasswordHasher<User> passwordHasher) : ICommandHandler<RegisterUserCommand, Guid>
+    IRoleRepository roleRepository,
+    IPasswordHasher<User> passwordHasher,
+    IUserPermissionRepository userPermissionRepository) : ICommandHandler<RegisterUserCommand, Guid>
 {
     public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
@@ -28,7 +30,12 @@ public sealed class RegisterUserCommandHandler(
         var passwordHash = passwordHasher.HashPassword(user, request.Password);
         user.PasswordHash = passwordHash;
 
+        var permissions = await roleRepository.GetPermissionsByRoleAsync(Role.Level2.Id);
+        var userPermissions = permissions.Select(p =>
+            UserPermission.Create(user.Id, p.Id));
+
         await userRepository.AddAsync(user);
+        await userPermissionRepository.AddRangeAsync(userPermissions);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         
         return Result.Success(user.Id);

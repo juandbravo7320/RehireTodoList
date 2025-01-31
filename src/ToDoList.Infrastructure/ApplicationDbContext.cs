@@ -24,16 +24,17 @@ public sealed class ApplicationDbContext(DbContextOptions options) : DbContext(o
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         var entries = ChangeTracker
-            .Entries();
+            .Entries()
+            .Where(entry => entry.Entity is Auditable && (entry.State == EntityState.Added || entry.State == EntityState.Modified));
         
         foreach (var entry in entries)
         {
-            ((Entity)entry.Entity).UpdatedAtUtc = DateTime.UtcNow;
+            ((Auditable)entry.Entity).UpdatedAtUtc = DateTime.UtcNow;
 
             if (entry.State == EntityState.Added)
             {
-                ((Entity)entry.Entity).CreatedAtUtc = DateTime.UtcNow;
-                ((Entity)entry.Entity).CreatedBy = "System";
+                ((Auditable)entry.Entity).CreatedAtUtc = DateTime.UtcNow;
+                ((Auditable)entry.Entity).CreatedBy = "System";
             }
         }
 
