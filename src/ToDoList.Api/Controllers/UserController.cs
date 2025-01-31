@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.Users.Commands.RegisterUser;
 using ToDoList.Application.Users.Commands.UpdateUser;
 using ToDoList.Application.Users.Queries.Login;
+using ToDoList.Domain.Users;
 
 namespace ToDoList.Api.Controllers;
 
@@ -26,6 +27,7 @@ public class UserController(ISender sender) : ControllerBase
     public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand request)
     {
         var result = await sender.Send(request);
+        if (result.IsFailure && result.Error == UserErrors.Unauthorized) return Forbid();
         if (result.IsFailure) return BadRequest(result.Error);
         return Ok();
     }

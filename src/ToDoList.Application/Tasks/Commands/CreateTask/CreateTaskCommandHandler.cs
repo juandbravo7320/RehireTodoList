@@ -1,4 +1,5 @@
 using ToDoList.Application.Abstractions.Authentication;
+using ToDoList.Application.Abstractions.Authorization;
 using ToDoList.Application.Abstractions.Messaging;
 using ToDoList.Domain.Abstractions;
 using ToDoList.Domain.Repository;
@@ -11,7 +12,8 @@ public class CreateTaskCommandHandler(
     IUnitOfWork unitOfWork,
     IUserContext userContext,
     ITaskRepository taskRepository,
-    IUserRepository userRepository) : ICommandHandler<CreateTaskCommand, Guid>
+    IUserRepository userRepository,
+    IPermissionService permissionService) : ICommandHandler<CreateTaskCommand, Guid>
 {
     public async Task<Result<Guid>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
     {
@@ -20,6 +22,10 @@ public class CreateTaskCommandHandler(
         
         if (user is null)
             return Result.Failure<Guid>(UserErrors.NotFound);
+        
+        var hasPermission = await permissionService.HasPermissionAsync(user.Id, Permission.CreateTask.Id);
+        
+        if (!hasPermission) return Result.Failure<Guid>(UserErrors.Unauthorized);
         
         var task = Task.Create(request.Description, user.Id);
         

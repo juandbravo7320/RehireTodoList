@@ -5,6 +5,7 @@ using ToDoList.Application.Tasks.Commands.CreateTask;
 using ToDoList.Application.Tasks.Commands.UpdateTask;
 using ToDoList.Application.Tasks.Queries.ListTasks;
 using ToDoList.Domain.Abstractions;
+using ToDoList.Domain.Users;
 using TaskStatus = ToDoList.Domain.Tasks.TaskStatus;
 
 namespace ToDoList.Api.Controllers;
@@ -18,14 +19,16 @@ public class TaskController(ISender sender) : ControllerBase
     public async Task<IActionResult> CreateTask([FromBody] CreateTaskCommand request)
     {
         var result = await sender.Send(request);
+        if (result.IsFailure && result.Error == UserErrors.Unauthorized) return Forbid();
         if (result.IsFailure) return BadRequest(result.Error);
         return Ok(result.Value);
     }
     
     [HttpPut]
-    public async Task<IActionResult> CreateTask([FromBody] UpdateTaskCommand request)
+    public async Task<IActionResult> UpdateTask([FromBody] UpdateTaskCommand request)
     {
         var result = await sender.Send(request);
+        if (result.IsFailure && result.Error == UserErrors.Unauthorized) return Forbid();
         if (result.IsFailure) return BadRequest(result.Error);
         return Ok();
     }
@@ -43,6 +46,7 @@ public class TaskController(ISender sender) : ControllerBase
             new Page(pageNumber, pageSize));
         
         var result = await sender.Send(request);
+        if (result.IsFailure && result.Error == UserErrors.Unauthorized) return Forbid();
         if (result.IsFailure) return BadRequest(result.Error);
         return Ok(result.Value);
     }

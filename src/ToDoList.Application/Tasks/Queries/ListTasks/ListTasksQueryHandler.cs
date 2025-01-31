@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Application.Abstractions.Authentication;
+using ToDoList.Application.Abstractions.Authorization;
 using ToDoList.Application.Abstractions.Messaging;
 using ToDoList.Domain.Abstractions;
 using ToDoList.Domain.Repository;
@@ -10,7 +11,8 @@ namespace ToDoList.Application.Tasks.Queries.ListTasks;
 public class ListTasksQueryHandler(
     IUserContext userContext,
     IUserRepository userRepository,
-    ITaskRepository taskRepository) : IQueryHandler<ListTasks, Pageable<TaskResponse>>
+    ITaskRepository taskRepository,
+    IPermissionService permissionService) : IQueryHandler<ListTasks, Pageable<TaskResponse>>
 {
     public async Task<Result<Pageable<TaskResponse>>> Handle(Queries.ListTasks.ListTasks request, CancellationToken cancellationToken)
     {
@@ -19,6 +21,10 @@ public class ListTasksQueryHandler(
 
         if (user is null)
             return Result.Failure<Pageable<TaskResponse>>(UserErrors.NotFound);
+        
+        var hasPermission = await permissionService.HasPermissionAsync(user.Id, Permission.ReadTask.Id);
+        
+        if (!hasPermission) return Result.Failure<Pageable<TaskResponse>>(UserErrors.Unauthorized);
         
         var queryResult = await FetchTasks(request, user);
 

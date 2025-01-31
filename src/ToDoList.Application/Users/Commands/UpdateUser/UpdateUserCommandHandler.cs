@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoList.Application.Abstractions.Authorization;
 using ToDoList.Application.Abstractions.Messaging;
 using ToDoList.Domain.Abstractions;
 using ToDoList.Domain.Repository;
@@ -9,6 +10,7 @@ namespace ToDoList.Application.Users.Commands.UpdateUser;
 public sealed class UpdateUserCommandHandler(
     IUnitOfWork unitOfWork,
     IUserRepository userRepository,
+    IPermissionService permissionService,
     IPermissionRepository permissionRepository,
     IUserPermissionRepository userPermissionRepository) : ICommandHandler<UpdateUserCommand>
 {
@@ -17,6 +19,10 @@ public sealed class UpdateUserCommandHandler(
         var user = await userRepository.FindByIdAsync(request.Id);
         
         if (user is null) return Result.Failure(UserErrors.NotFound);
+        
+        var hasPermission = await permissionService.HasPermissionAsync(user.Id, Permission.ManageUsers.Id);
+        
+        if (!hasPermission) return Result.Failure(UserErrors.Unauthorized);
         
         var permissionsResult = await ValidatePermissions(request.Permissions);
         

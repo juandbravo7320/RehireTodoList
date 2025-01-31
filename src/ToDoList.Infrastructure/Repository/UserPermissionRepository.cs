@@ -22,4 +22,9 @@ public class UserPermissionRepository(ApplicationDbContext dbContext) : IUserPer
     {
         _dbSet.RemoveRange(userPermissions);
     }
+
+    public async Task<bool> HasPermissionAsync(Guid userId, Guid permissionId)
+    {
+        return await _dbSet.AnyAsync(up => up.UserId == userId && up.PermissionId == permissionId);
+    }
 }

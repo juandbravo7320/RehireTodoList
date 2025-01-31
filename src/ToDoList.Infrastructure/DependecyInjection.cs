@@ -7,11 +7,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using ToDoList.Application.Abstractions.Authentication;
+using ToDoList.Application.Abstractions.Authorization;
 using ToDoList.Application.Abstractions.Data;
 using ToDoList.Domain.Abstractions;
 using ToDoList.Domain.Repository;
 using ToDoList.Domain.Users;
 using ToDoList.Infrastructure.Authentication;
+using ToDoList.Infrastructure.Authorization;
 using ToDoList.Infrastructure.Data;
 using ToDoList.Infrastructure.Repository;
 
@@ -27,6 +29,7 @@ public static class DependecyInjection
         
         AddPersistence(services, configuration);
         AddAuthentication(services, configuration);
+        AddAuthorization(services);
 
         return services;
     }
@@ -91,5 +94,10 @@ public static class DependecyInjection
         
         services.AddScoped<IUserContext, UserContext>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+    }
+
+    private static void AddAuthorization(IServiceCollection services)
+    {
+        services.AddScoped<IPermissionService, PermissionService>();
     }
 }
