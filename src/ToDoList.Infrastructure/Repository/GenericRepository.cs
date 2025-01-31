@@ -17,4 +17,9 @@ public abstract class GenericRepository<T, TId>(ApplicationDbContext dbContext) 
     {
         await _dbSet.AddAsync(entity);
     }
+    
+    public IQueryable<T> Queryable()
+    {
+        return _dbSet.AsQueryable();
+    }
 }
