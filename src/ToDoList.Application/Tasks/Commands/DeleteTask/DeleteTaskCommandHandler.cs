@@ -21,10 +21,12 @@ public class DeleteTaskCommandHandler(
         var hasPermission = await permissionService.HasPermissionAsync(userId, Permission.DeleteTask.Id);
         
         if (!hasPermission) return Result.Failure<Guid>(UserErrors.Unauthorized);
-
+        
         var task = await taskRepository.FindByIdAsync(request.Id);
 
         if (task is null) return Result.Failure(TaskErrors.NotFound);
+        
+        if (userId != task.OwnerId) return Result.Failure(TaskErrors.NotOwner);
         
         taskRepository.Delete(task);
 
