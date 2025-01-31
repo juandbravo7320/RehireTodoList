@@ -7,7 +7,7 @@ public sealed class UserPermission : Auditable
     public Guid UserId { get; private set; }
     public User User { get; }
     public Guid PermissionId { get; private set; }
-    public User Permission { get; }
+    public Permission Permission { get; }
     
     public UserPermission()
     {
@@ -21,7 +21,7 @@ public sealed class UserPermission : Auditable
         PermissionId = permissionId;
     }
     
-    public UserPermission Create(
+    public static UserPermission Create(
         Guid userId,
         Guid permissionId)
     {
