@@ -1,3 +1,4 @@
+using ToDoList.Application.Abstractions.Authentication;
 using ToDoList.Application.Abstractions.Messaging;
 using ToDoList.Domain.Abstractions;
 using ToDoList.Domain.Repository;
@@ -8,12 +9,14 @@ namespace ToDoList.Application.Tasks.Commands.CreateTask;
 
 public class CreateTaskCommandHandler(
     IUnitOfWork unitOfWork,
+    IUserContext userContext,
     ITaskRepository taskRepository,
     IUserRepository userRepository) : ICommandHandler<CreateTaskCommand, Guid>
 {
     public async Task<Result<Guid>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
     {
-        var user = await userRepository.FindByIdAsync(request.UserId);
+        var userId = userContext.UserId;
+        var user = await userRepository.FindByIdAsync(userId);
         
         if (user is null)
             return Result.Failure<Guid>(UserErrors.NotFound);

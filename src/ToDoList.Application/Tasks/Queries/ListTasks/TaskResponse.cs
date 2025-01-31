@@ -1,6 +1,6 @@
 using TaskStatus = ToDoList.Domain.Tasks.TaskStatus;
 
-namespace ToDoList.Application.Tasks.Queries;
+namespace ToDoList.Application.Tasks.Queries.ListTasks;
 
 public record TaskResponse(
     Guid Id,

@@ -1,18 +1,21 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoList.Application.Abstractions.Authentication;
 using ToDoList.Application.Abstractions.Messaging;
 using ToDoList.Domain.Abstractions;
 using ToDoList.Domain.Repository;
 using ToDoList.Domain.Users;
 
-namespace ToDoList.Application.Tasks.Queries;
+namespace ToDoList.Application.Tasks.Queries.ListTasks;
 
 public class ListTasksQueryHandler(
+    IUserContext userContext,
     IUserRepository userRepository,
     ITaskRepository taskRepository) : IQueryHandler<ListTasks, Pageable<TaskResponse>>
 {
-    public async Task<Result<Pageable<TaskResponse>>> Handle(ListTasks request, CancellationToken cancellationToken)
+    public async Task<Result<Pageable<TaskResponse>>> Handle(Queries.ListTasks.ListTasks request, CancellationToken cancellationToken)
     {
-        var user = await userRepository.FindByIdAsync(request.UserId);
+        var userId = userContext.UserId;
+        var user = await userRepository.FindByIdAsync(userId);
 
         if (user is null)
             return Result.Failure<Pageable<TaskResponse>>(UserErrors.NotFound);
@@ -28,7 +31,7 @@ public class ListTasksQueryHandler(
         return Result.Success(pageable);
     }
 
-    private async Task<(int, List<TaskResponse>)> FetchTasks(ListTasks request, User user)
+    private async Task<(int, List<TaskResponse>)> FetchTasks(Queries.ListTasks.ListTasks request, User user)
     {
          var query = taskRepository.Queryable()
             .Where(x => x.OwnerId == user.Id)

@@ -75,8 +75,8 @@ public static class DependecyInjection
             options.SaveToken = true;
             options.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = authenticationSettings.Issuer,
@@ -85,6 +85,9 @@ public static class DependecyInjection
             };
         });
         
+        services.AddHttpContextAccessor();
+        
+        services.AddScoped<IUserContext, UserContext>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
     }
 }

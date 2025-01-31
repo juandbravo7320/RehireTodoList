@@ -5,10 +5,7 @@ namespace ToDoList.Application.Tasks.Commands.CreateTask;
 public class CreateTaskValidator : AbstractValidator<CreateTaskCommand>
 {
     public CreateTaskValidator()
-    {
-        RuleFor(x => x.UserId)
-            .NotEmpty();
-        
+    {   
         RuleFor(x => x.Description)
             .NotEmpty()
             .MaximumLength(500);

@@ -23,7 +23,6 @@ public class UserController(ISender sender) : ControllerBase
     }
     
     [HttpPut]
-    [AllowAnonymous]
     public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand request)
     {
         var result = await sender.Send(request);
